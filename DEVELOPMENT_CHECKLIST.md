@@ -8,6 +8,7 @@
 
 ## 👥 团队分工
 
+<<<<<<< HEAD
 ### 🎨 你负责的任务
 - ✅ 前端应用开发（React Native + Expo）
 - ✅ 用户认证和授权
@@ -16,6 +17,21 @@
 - ✅ 拍照检测流程
 - ✅ 调用 Coze AI API 进行分析
 - ✅ 个人中心和收藏功能
+=======
+### ✅ Step 1: 环境准备
+- [x] 安装 Node.js 18+
+- [ ] 安装 Git
+- [ ] 安装 VS Code
+- [ ] 安装 VS Code 插件：
+  - [ ] ESLint
+  - [ ] Prettier
+  - [ ] React Native Tools
+  - [ ] TypeScript
+- [ ] 注册 Expo 账号
+- [ ] 安装 Expo CLI：`npm install -g expo-cli`
+- [ ] 安装 EAS CLI：`npm install -g eas-cli`
+- [ ] 手机安装 Expo Go App
+>>>>>>> e74b53d4bb34944c97ecdcbb3dad3808cad7d5e8
 
 ### 🤖 协作伙伴负责的任务
 - ⚠️ 酒店评价数据抓取（从在线平台）
