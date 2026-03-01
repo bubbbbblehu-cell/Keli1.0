@@ -1,589 +1,355 @@
-# 女性安全地图 - 开发检查清单
+# 女性安全地图 - 开发检查清单与2周计划
 
-**版本**: 1.0  
+**版本**: 2.0  
 **更新**: 2026-03-01  
-**用途**: 逐步开发指南，每完成一项打勾 ✅
+**团队**: 你（前端开发） + 协作伙伴（数据抓取 + Agent）
 
 ---
 
-## 📋 第一阶段：项目初始化（预计 1-2 天）
+## 👥 团队分工
 
-### ✅ Step 1: 环境准备
-- [ ] 安装 Node.js 18+
-- [ ] 安装 Git
-- [ ] 安装 VS Code
-- [ ] 安装 VS Code 插件：
-  - [ ] ESLint
-  - [ ] Prettier
-  - [ ] React Native Tools
-  - [ ] TypeScript
-- [ ] 注册 Expo 账号
-- [ ] 安装 Expo CLI：`npm install -g expo-cli`
-- [ ] 安装 EAS CLI：`npm install -g eas-cli`
-- [ ] 手机安装 Expo Go App
+### 🎨 你负责的任务
+- ✅ 前端应用开发（React Native + Expo）
+- ✅ 用户认证和授权
+- ✅ 地图展示和热力图
+- ✅ 酒店详情展示（读取数据库）
+- ✅ 拍照检测流程
+- ✅ 调用 Coze AI API 进行分析
+- ✅ 个人中心和收藏功能
 
-### ✅ Step 2: 创建 GitHub 仓库
-- [ ] 创建新仓库：`safety-map-mobile`
-- [ ] 设置为私有仓库
-- [ ] 添加 README.md
-- [ ] 添加 .gitignore (Node.js + React Native)
-- [ ] 添加 LICENSE (MIT)
-- [ ] Clone 到本地
-
-### ✅ Step 3: 初始化 Expo 项目
-```bash
-# 创建项目
-npx create-expo-app safety-map-mobile --template blank-typescript
-
-# 进入目录
-cd safety-map-mobile
-
-# 初始化 Git
-git init
-git add .
-git commit -m "Initial commit"
-git remote add origin <your-repo-url>
-git push -u origin main
-```
-
-- [ ] 项目创建成功
-- [ ] 运行 `npm start` 测试
-- [ ] 在 Expo Go 中打开测试
-- [ ] 提交到 GitHub
-
-### ✅ Step 4: 安装核心依赖
-```bash
-# 导航
-npx expo install @react-navigation/native @react-navigation/stack @react-navigation/bottom-tabs
-npx expo install react-native-screens react-native-safe-area-context react-native-gesture-handler
-
-# 地图
-npx expo install react-native-maps
-
-# 状态管理
-npm install zustand
-
-# UI 组件
-npm install react-native-paper react-native-vector-icons
-
-# Supabase
-npm install @supabase/supabase-js
-
-# 相机和图片
-npx expo install expo-camera expo-image-picker expo-image-manipulator
-
-# 位置
-npx expo install expo-location
-
-# 工具
-npm install date-fns zod
-npm install react-native-dotenv
-
-# 开发依赖
-npm install -D @types/react @types/react-native
-npm install -D eslint prettier
-npm install -D @typescript-eslint/eslint-plugin @typescript-eslint/parser
-```
-
-- [ ] 所有依赖安装成功
-- [ ] 运行 `npm start` 无报错
-- [ ] 提交到 GitHub
-
-### ✅ Step 5: 配置项目结构
-```bash
-# 创建目录
-mkdir -p src/app/navigation
-mkdir -p src/features/{auth,map,hotel,detection,profile}/{screens,components,hooks,store}
-mkdir -p src/shared/{components,hooks,utils,constants,types}
-mkdir -p src/services/{api,supabase,location}
-mkdir -p src/assets/{images,fonts,icons}
-```
-
-- [ ] 目录结构创建完成
-- [ ] 创建 `src/app/App.tsx`
-- [ ] 修改根目录 `App.tsx` 导入 `src/app/App.tsx`
-- [ ] 提交到 GitHub
-
-### ✅ Step 6: 配置 TypeScript
-创建 `tsconfig.json`：
-```json
-{
-  "extends": "expo/tsconfig.base",
-  "compilerOptions": {
-    "strict": true,
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["src/*"],
-      "@app/*": ["src/app/*"],
-      "@features/*": ["src/features/*"],
-      "@shared/*": ["src/shared/*"],
-      "@services/*": ["src/services/*"],
-      "@assets/*": ["src/assets/*"]
-    }
-  }
-}
-```
-
-- [ ] TypeScript 配置完成
-- [ ] 路径别名测试通过
-- [ ] 提交到 GitHub
-
-### ✅ Step 7: 配置 ESLint 和 Prettier
-创建 `.eslintrc.js`：
-```javascript
-module.exports = {
-  extends: ['expo', 'prettier'],
-  plugins: ['prettier'],
-  rules: {
-    'prettier/prettier': 'error',
-  },
-};
-```
-
-创建 `.prettierrc`：
-```json
-{
-  "semi": true,
-  "singleQuote": true,
-  "tabWidth": 2,
-  "trailingComma": "es5"
-}
-```
-
-- [ ] ESLint 配置完成
-- [ ] Prettier 配置完成
-- [ ] 运行 `npm run lint` 测试
-- [ ] 提交到 GitHub
-
-### ✅ Step 8: 配置环境变量
-创建 `.env.example`：
-```
-SUPABASE_URL=https://xxx.supabase.co
-SUPABASE_ANON_KEY=your_anon_key
-API_URL=http://localhost:3001
-```
-
-创建 `.env`（不提交到 Git）：
-```
-SUPABASE_URL=https://hmmruoankhohowlzajll.supabase.co
-SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
-API_URL=http://localhost:3001
-```
-
-- [ ] 环境变量配置完成
-- [ ] `.env` 添加到 `.gitignore`
-- [ ] 提交 `.env.example` 到 GitHub
+### 🤖 协作伙伴负责的任务
+- ⚠️ 酒店评价数据抓取（从在线平台）
+- ⚠️ 数据存储到 Supabase
+- ⚠️ 酒店照片回传给 Agent
+- ⚠️ 后端 API 开发（Node.js + Express）
 
 ---
 
-## 🏗️ 第二阶段：基础设施（预计 2-3 天）
+## 📅 2周开发计划（14天）
 
-### ✅ Step 9: 配置 Supabase 客户端
-创建 `src/services/supabase/client.ts`：
-```typescript
-import { createClient } from '@supabase/supabase-js';
-import { SUPABASE_URL, SUPABASE_ANON_KEY } from '@env';
+### 第1周：基础设施 + 核心功能
 
-export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-```
+#### 第1天（周一）- 项目初始化 🎨 你
+- [ ] 安装开发环境（Node.js, Git, VS Code, Expo CLI）
+- [ ] 创建 GitHub 仓库
+- [ ] 初始化 Expo 项目
+- [ ] 安装所有依赖
+- [ ] 配置 TypeScript, ESLint, Prettier
+- [ ] 创建项目目录结构
+- [ ] 配置环境变量
 
-- [ ] Supabase 客户端创建
-- [ ] 测试连接成功
-- [ ] 提交到 GitHub
-
-### ✅ Step 10: 创建类型定义
-创建 `src/shared/types/index.ts`：
-```typescript
-// 城市类型
-export interface City {
-  id: string;
-  code: string;
-  name: string;
-  country: string;
-  latitude: number;
-  longitude: number;
-}
-
-// 酒店类型
-export interface Hotel {
-  id: string;
-  cityId: string;
-  name: string;
-  address: string;
-  latitude: number;
-  longitude: number;
-  safetyScore: number;
-  reviewCount: number;
-}
-
-// 评价类型
-export interface Review {
-  id: string;
-  hotelId: string;
-  userId: string;
-  rating: number;
-  comment: string;
-  createdAt: string;
-}
-
-// 用户类型
-export interface User {
-  id: string;
-  email: string;
-  displayName?: string;
-  avatarUrl?: string;
-}
-
-// 检测类型
-export interface Detection {
-  id: string;
-  userId: string;
-  hotelId?: string;
-  photoUrl: string;
-  detectionResult: DetectionResult;
-  createdAt: string;
-}
-
-export interface DetectionResult {
-  hasRisk: boolean;
-  riskLevel: 'high' | 'medium' | 'low';
-  confidence: number;
-  detectedItems: string[];
-  recommendations: string[];
-  safetyScore: number;
-}
-```
-
-- [ ] 类型定义完成
-- [ ] 提交到 GitHub
-
-### ✅ Step 11: 创建常量
-创建 `src/shared/constants/cities.ts`：
-```typescript
-import { City } from '@shared/types';
-
-export const CITIES: City[] = [
-  {
-    id: 'xishuangbanna',
-    code: 'xishuangbanna',
-    name: '西双版纳',
-    country: '中国',
-    latitude: 22.0084,
-    longitude: 100.7979,
-  },
-  // ... 其他城市
-];
-```
-
-创建 `src/shared/constants/colors.ts`：
-```typescript
-export const colors = {
-  primary: '#6366f1',
-  secondary: '#10b981',
-  danger: '#ef4444',
-  warning: '#f59e0b',
-  success: '#10b981',
-  
-  safetyHigh: '#4ade80',
-  safetyMedium: '#fbbf24',
-  safetyLow: '#f87171',
-  
-  background: '#ffffff',
-  surface: '#f5f5f5',
-  text: '#1f2937',
-  textSecondary: '#6b7280',
-  border: '#e5e7eb',
-};
-```
-
-- [ ] 常量定义完成
-- [ ] 提交到 GitHub
-
-### ✅ Step 12: 配置导航系统
-创建 `src/app/navigation/types.ts`：
-```typescript
-export type RootStackParamList = {
-  Auth: undefined;
-  Main: undefined;
-};
-
-export type AuthStackParamList = {
-  Login: undefined;
-  Register: undefined;
-};
-
-export type MainTabParamList = {
-  Map: undefined;
-  Detection: undefined;
-  Profile: undefined;
-};
-
-export type MapStackParamList = {
-  MapHome: undefined;
-  CitySelection: undefined;
-  HotelDetail: { hotelId: string };
-};
-```
-
-创建 `src/app/navigation/RootNavigator.tsx`：
-```typescript
-import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import { useAuthStore } from '@features/auth/store/authStore';
-import AuthNavigator from './AuthNavigator';
-import MainNavigator from './MainNavigator';
-
-const Stack = createStackNavigator();
-
-export default function RootNavigator() {
-  const { user } = useAuthStore();
-
-  return (
-    <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
-        {user ? (
-          <Stack.Screen name="Main" component={MainNavigator} />
-        ) : (
-          <Stack.Screen name="Auth" component={AuthNavigator} />
-        )}
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
-}
-```
-
-- [ ] 导航类型定义完成
-- [ ] RootNavigator 创建完成
-- [ ] AuthNavigator 创建完成
-- [ ] MainNavigator 创建完成
-- [ ] 提交到 GitHub
-
-### ✅ Step 13: 创建认证 Store
-创建 `src/features/auth/store/authStore.ts`：
-```typescript
-import create from 'zustand';
-import { User } from '@shared/types';
-import { supabase } from '@services/supabase/client';
-
-interface AuthState {
-  user: User | null;
-  isLoading: boolean;
-  login: (email: string, password: string) => Promise<void>;
-  register: (email: string, password: string) => Promise<void>;
-  logout: () => Promise<void>;
-  checkAuth: () => Promise<void>;
-}
-
-export const useAuthStore = create<AuthState>((set) => ({
-  user: null,
-  isLoading: false,
-  
-  login: async (email, password) => {
-    set({ isLoading: true });
-    try {
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email,
-        password,
-      });
-      if (error) throw error;
-      set({ user: data.user as User, isLoading: false });
-    } catch (error) {
-      set({ isLoading: false });
-      throw error;
-    }
-  },
-  
-  register: async (email, password) => {
-    set({ isLoading: true });
-    try {
-      const { data, error } = await supabase.auth.signUp({
-        email,
-        password,
-      });
-      if (error) throw error;
-      set({ user: data.user as User, isLoading: false });
-    } catch (error) {
-      set({ isLoading: false });
-      throw error;
-    }
-  },
-  
-  logout: async () => {
-    await supabase.auth.signOut();
-    set({ user: null });
-  },
-  
-  checkAuth: async () => {
-    const { data } = await supabase.auth.getSession();
-    set({ user: data.session?.user as User || null });
-  },
-}));
-```
-
-- [ ] authStore 创建完成
-- [ ] 测试登录/注册/登出
-- [ ] 提交到 GitHub
+**产出**: ✅ 项目骨架搭建完成
 
 ---
 
-## 🎨 第三阶段：核心功能开发（预计 5-7 天）
+#### 第2天（周二）- 基础设施 🎨 你 + 🤖 协作伙伴
 
-### ✅ Step 14: 开发登录页面
-创建 `src/features/auth/screens/LoginScreen.tsx`：
-```typescript
-import React, { useState } from 'react';
-import { View, StyleSheet } from 'react-native';
-import { TextInput, Button, Text } from 'react-native-paper';
-import { useAuthStore } from '../store/authStore';
+**你的任务**:
+- [ ] 配置 Supabase 客户端
+- [ ] 创建类型定义（TypeScript）
+- [ ] 创建常量配置（城市、主题、检测部位）
+- [ ] 配置导航系统（RootNavigator, AuthNavigator, MainNavigator）
+- [ ] 创建通用组件（Loading, ErrorBoundary）
+- [ ] 创建工具函数（format, storage, validation）
 
-export default function LoginScreen({ navigation }) {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const { login, isLoading } = useAuthStore();
+**协作伙伴的任务**:
+- [ ] 搭建后端 API 服务器（Node.js + Express）
+- [ ] 配置 Supabase 数据库
+- [ ] 创建数据库表结构（cities, hotels, reviews, favorites, photo_detections）
+- [ ] 编写数据库迁移脚本
 
-  const handleLogin = async () => {
-    try {
-      await login(email, password);
-    } catch (error) {
-      alert(error.message);
-    }
-  };
-
-  return (
-    <View style={styles.container}>
-      <Text variant="headlineMedium">登录</Text>
-      <TextInput
-        label="邮箱"
-        value={email}
-        onChangeText={setEmail}
-        autoCapitalize="none"
-        keyboardType="email-address"
-      />
-      <TextInput
-        label="密码"
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry
-      />
-      <Button mode="contained" onPress={handleLogin} loading={isLoading}>
-        登录
-      </Button>
-      <Button onPress={() => navigation.navigate('Register')}>
-        还没有账号？注册
-      </Button>
-    </View>
-  );
-}
-```
-
-- [ ] LoginScreen 创建完成
-- [ ] RegisterScreen 创建完成
-- [ ] 测试登录流程
-- [ ] 提交到 GitHub
-
-### ✅ Step 15: 开发地图页面
-创建 `src/features/map/screens/MapScreen.tsx`：
-```typescript
-import React, { useEffect } from 'react';
-import { View, StyleSheet } from 'react-native';
-import MapView, { Marker } from 'react-native-maps';
-import { useMapStore } from '../store/mapStore';
-
-export default function MapScreen() {
-  const { hotels, loadHotels, selectedCity } = useMapStore();
-
-  useEffect(() => {
-    if (selectedCity) {
-      loadHotels(selectedCity.id);
-    }
-  }, [selectedCity]);
-
-  return (
-    <View style={styles.container}>
-      <MapView
-        style={styles.map}
-        initialRegion={{
-          latitude: selectedCity?.latitude || 22.0084,
-          longitude: selectedCity?.longitude || 100.7979,
-          latitudeDelta: 0.1,
-          longitudeDelta: 0.1,
-        }}
-      >
-        {hotels.map((hotel) => (
-          <Marker
-            key={hotel.id}
-            coordinate={{
-              latitude: hotel.latitude,
-              longitude: hotel.longitude,
-            }}
-            title={hotel.name}
-            description={`评分: ${hotel.safetyScore}/5.0`}
-          />
-        ))}
-      </MapView>
-    </View>
-  );
-}
-```
-
-- [ ] MapScreen 创建完成
-- [ ] 地图显示正常
-- [ ] 酒店标记显示
-- [ ] 提交到 GitHub
-
-### ✅ Step 16-20: 继续开发其他功能
-- [ ] 城市选择页面
-- [ ] 酒店详情页面
-- [ ] 拍照检测流程
-- [ ] 个人中心页面
-- [ ] 收藏功能
+**产出**: ✅ 基础设施完成，数据库就绪
 
 ---
 
-## 🧪 第四阶段：测试和优化（预计 2-3 天）
+#### 第3天（周三）- 认证模块 🎨 你
 
-### ✅ Step 21: 单元测试
-- [ ] 安装 Jest 和 Testing Library
-- [ ] 编写 Store 测试
-- [ ] 编写组件测试
-- [ ] 测试覆盖率 > 80%
+- [ ] 创建 authStore（状态管理）
+- [ ] 开发登录页面（LoginScreen）
+- [ ] 开发注册页面（RegisterScreen）
+- [ ] 实现表单验证
+- [ ] 实现 Token 持久化
+- [ ] 测试登录/注册/登出流程
 
-### ✅ Step 22: 性能优化
-- [ ] 图片懒加载
-- [ ] 列表虚拟化
-- [ ] 地图标记聚合
-- [ ] 缓存策略
+**产出**: ✅ 用户可以注册、登录、登出
 
-### ✅ Step 23: 真机测试
+---
+
+#### 第4天（周四）- 地图模块（1/2）🎨 你
+
+- [ ] 创建 mapStore（状态管理）
+- [ ] 开发城市选择页面（CitySelectionScreen）
+- [ ] 开发地图主页面（MapScreen）
+- [ ] 实现地图显示（react-native-maps）
+- [ ] 实现酒店标记显示
+- [ ] 测试地图基本功能
+
+**产出**: ✅ 地图可以显示，酒店标记可见
+
+---
+
+#### 第5天（周五）- 地图模块（2/2）+ 数据抓取 🎨 你 + 🤖 协作伙伴
+
+**你的任务**:
+- [ ] 开发热力图组件（HeatmapLayer）
+- [ ] 实现热力图渲染算法
+- [ ] 实现评分筛选功能
+- [ ] 实现热力图开关
+- [ ] 优化地图性能
+- [ ] 测试热力图显示
+
+**协作伙伴的任务**:
+- [ ] 开发酒店评价数据抓取脚本
+- [ ] 从 Booking.com/Agoda 等平台抓取数据
+- [ ] 数据清洗和格式化
+- [ ] 存储到 Supabase 的 hotels 和 reviews 表
+- [ ] 测试数据抓取流程
+
+**产出**: ✅ 热力图完成，初始酒店数据导入
+
+---
+
+#### 第6天（周六）- 酒店模块 🎨 你
+
+- [ ] 创建 hotelStore（状态管理）
+- [ ] 开发酒店详情页面（HotelDetailScreen）
+- [ ] 实现酒店信息展示
+- [ ] 实现评价列表展示
+- [ ] 实现添加评价功能
+- [ ] 实现收藏/取消收藏功能
+- [ ] 实现跳转在线平台
+- [ ] 测试酒店详情功能
+
+**产出**: ✅ 酒店详情页完成
+
+---
+
+#### 第7天（周日）- 休息或补充开发 🎨 你 + 🤖 协作伙伴
+
+**可选任务**:
+- [ ] 修复本周发现的 Bug
+- [ ] 优化代码和性能
+- [ ] 补充单元测试
+- [ ] 更新文档
+
+---
+
+### 第2周：检测功能 + 个人中心 + 测试
+
+#### 第8天（周一）- 检测模块（1/3）🎨 你
+
+- [ ] 创建 detectionStore（状态管理）
+- [ ] 开发检测首页（DetectionHomeScreen）
+- [ ] 实现检测部位选择（6个部位）
+- [ ] 开发自查引导页面（DetectionGuideScreen）
+- [ ] 实现自查问答功能
+- [ ] 测试检测流程前半部分
+
+**产出**: ✅ 用户可以选择部位并完成自查
+
+---
+
+#### 第9天（周二）- 检测模块（2/3）+ AI API 🎨 你 + 🤖 协作伙伴
+
+**你的任务**:
+- [ ] 开发拍照上传页面（PhotoCaptureScreen）
+- [ ] 实现相机调用功能
+- [ ] 实现相册选择功能
+- [ ] 实现照片压缩（1920x1920, 85%）
+- [ ] 实现照片预览
+- [ ] 测试拍照功能
+
+**协作伙伴的任务**:
+- [ ] 开发照片分析 API（POST /api/analyze-photos）
+- [ ] 集成 Coze AI API（Bot ID: 7588350694353649679）
+- [ ] 实现照片回传 Agent 功能
+- [ ] 测试 AI 分析流程
+
+**产出**: ✅ 用户可以拍照并上传
+
+---
+
+#### 第10天（周三）- 检测模块（3/3）🎨 你
+
+- [ ] 开发结果展示页面（DetectionResultScreen）
+- [ ] 实现 AI 分析结果展示
+- [ ] 实现安全评分显示
+- [ ] 实现风险等级显示
+- [ ] 实现安全建议显示
+- [ ] 实现保存检测记录功能
+- [ ] 实现分享结果功能
+- [ ] 测试完整检测流程
+
+**产出**: ✅ 检测功能完整可用
+
+---
+
+#### 第11天（周四）- 个人中心模块 🎨 你
+
+- [ ] 创建 profileStore（状态管理）
+- [ ] 开发个人中心首页（ProfileScreen）
+- [ ] 实现个人信息展示
+- [ ] 实现编辑个人资料功能
+- [ ] 开发收藏列表页面（FavoritesScreen）
+- [ ] 开发检测历史页面（DetectionHistoryScreen）
+- [ ] 实现退出登录功能
+- [ ] 测试个人中心功能
+
+**产出**: ✅ 个人中心完成
+
+---
+
+#### 第12天（周五）- 数据完善 + 集成测试 🎨 你 + 🤖 协作伙伴
+
+**你的任务**:
+- [ ] 集成测试所有功能模块
+- [ ] 测试用户完整流程
+- [ ] 修复发现的 Bug
+- [ ] 优化用户体验
+
+**协作伙伴的任务**:
+- [ ] 完善酒店数据（至少覆盖 5 个城市）
+- [ ] 补充评价数据（每个酒店至少 10 条评价）
+- [ ] 测试 API 稳定性
+- [ ] 优化 API 性能
+
+**产出**: ✅ 所有功能集成完成
+
+---
+
+#### 第13天（周六）- 性能优化 + 真机测试 🎨 你
+
+- [ ] 图片懒加载优化
+- [ ] 列表虚拟化优化
+- [ ] 地图标记聚合优化
+- [ ] API 请求缓存
 - [ ] iOS 真机测试
 - [ ] Android 真机测试
-- [ ] 修复发现的 Bug
+- [ ] 修复真机测试发现的问题
+
+**产出**: ✅ 应用性能优化完成
 
 ---
 
-## 🚀 第五阶段：打包发布（预计 1-2 天）
+#### 第14天（周日）- 打包发布准备 🎨 你
 
-### ✅ Step 24: 配置 EAS Build
-```bash
-eas build:configure
-```
-
+- [ ] 配置 EAS Build
 - [ ] 配置 iOS 证书
 - [ ] 配置 Android 签名
-- [ ] 测试构建
-
-### ✅ Step 25: 发布
-- [ ] 构建 iOS 版本
-- [ ] 构建 Android 版本
+- [ ] 构建 iOS 测试版本
+- [ ] 构建 Android 测试版本
 - [ ] 提交到 TestFlight
 - [ ] 提交到 Google Play Internal Testing
+- [ ] 编写发布文档
+
+**产出**: ✅ 应用可以发布测试
 
 ---
 
-## 📝 开发规范
+## 📊 每日工作时间估算
 
-### Git Commit 规范
+| 任务类型 | 预计时间 | 说明 |
+|---------|---------|------|
+| 页面开发 | 4-6小时/页 | 包括 UI + 逻辑 + 测试 |
+| Store 开发 | 2-3小时/个 | 状态管理 |
+| 组件开发 | 1-2小时/个 | 通用组件 |
+| 集成测试 | 2-4小时 | 功能联调 |
+| Bug 修复 | 1-3小时 | 根据复杂度 |
+
+**每天工作时间**: 6-8小时  
+**总工作时间**: 84-112小时（2周）
+
+---
+
+## ✅ 检查清单（按优先级）
+
+### P0 - 必须完成（第1周）
+
+#### 🎨 你的任务
+- [ ] 项目初始化和配置
+- [ ] 认证模块（登录、注册）
+- [ ] 地图模块（地图、热力图、标记）
+- [ ] 酒店详情页面
+
+#### 🤖 协作伙伴的任务
+- [ ] 数据库表结构创建
+- [ ] 后端 API 搭建
+- [ ] 酒店数据抓取（至少 3 个城市）
+- [ ] 照片分析 API 开发
+
+---
+
+### P1 - 重要功能（第2周）
+
+#### 🎨 你的任务
+- [ ] 检测模块（完整流程）
+- [ ] 个人中心（资料、收藏、历史）
+- [ ] 性能优化
+- [ ] 真机测试
+
+#### 🤖 协作伙伴的任务
+- [ ] 完善酒店数据（5 个城市）
+- [ ] 补充评价数据
+- [ ] 照片回传 Agent 功能
+- [ ] API 性能优化
+
+---
+
+### P2 - 可选功能（后续迭代）
+
+#### 🎨 你的任务
+- [ ] 设置页面
+- [ ] 第三方登录（Google、Apple）
+- [ ] 忘记密码功能
+- [ ] 上传头像功能
+- [ ] 删除检测记录功能
+
+#### 🤖 协作伙伴的任务
+- [ ] 更多城市数据
+- [ ] 数据自动更新
+- [ ] 数据质量监控
+- [ ] API 文档完善
+
+---
+
+## 🔄 协作流程
+
+### 每日站会（15分钟）
+- 昨天完成了什么
+- 今天计划做什么
+- 遇到什么问题
+
+### 代码审查
+- 每个功能完成后进行 Code Review
+- 使用 GitHub Pull Request
+- 至少 1 人审查通过才能合并
+
+### 测试流程
+1. 开发者自测
+2. 交叉测试（你测她的，她测你的）
+3. 集成测试
+4. 真机测试
+
+### 问题追踪
+- 使用 GitHub Issues 追踪 Bug
+- 标签分类：bug, feature, enhancement
+- 优先级：P0, P1, P2
+
+---
+
+## 📝 Git 工作流
+
+### 分支策略
+```
+main (生产)
+  ↑
+develop (开发)
+  ↑
+feature/你的功能 (你的分支)
+feature/她的功能 (她的分支)
+```
+
+### Commit 规范
 ```
 feat: 新功能
 fix: 修复 Bug
@@ -594,15 +360,142 @@ test: 测试
 chore: 构建/工具
 ```
 
-### 分支管理
-```
-main        # 生产分支
-develop     # 开发分支
-feature/*   # 功能分支
-bugfix/*    # Bug 修复分支
+### 示例
+```bash
+# 你的工作流
+git checkout develop
+git pull origin develop
+git checkout -b feature/map-module
+# ... 开发 ...
+git add .
+git commit -m "feat: 完成地图模块开发"
+git push origin feature/map-module
+# 创建 Pull Request
+
+# 她的工作流
+git checkout develop
+git pull origin develop
+git checkout -b feature/data-scraping
+# ... 开发 ...
+git add .
+git commit -m "feat: 完成酒店数据抓取"
+git push origin feature/data-scraping
+# 创建 Pull Request
 ```
 
 ---
 
-**祝开发顺利！** 🎉
+## 🎯 里程碑
 
+### 第1周结束（Day 7）
+- ✅ 用户可以注册、登录
+- ✅ 地图可以显示酒店和热力图
+- ✅ 酒店详情可以查看
+- ✅ 初始数据已导入（3个城市）
+
+### 第2周结束（Day 14）
+- ✅ 检测功能完整可用
+- ✅ 个人中心功能完成
+- ✅ 所有功能集成测试通过
+- ✅ 应用可以发布测试版本
+
+---
+
+## 📞 沟通渠道
+
+### 日常沟通
+- 微信/钉钉：即时沟通
+- GitHub Issues：问题追踪
+- GitHub Pull Request：代码审查
+
+### 文档共享
+- GitHub Wiki：技术文档
+- 飞书文档：需求文档
+- Figma：设计稿
+
+### 会议
+- 每日站会：15分钟
+- 周会：1小时（回顾 + 计划）
+- 临时会议：根据需要
+
+---
+
+## 🚨 风险管理
+
+### 可能的风险
+
+#### 技术风险
+- ⚠️ Expo 兼容性问题
+- ⚠️ 地图性能问题（大量标记）
+- ⚠️ AI API 调用失败
+- ⚠️ 数据抓取被封禁
+
+#### 解决方案
+- 提前测试 Expo 功能
+- 实现地图标记聚合
+- 添加 API 重试机制
+- 使用代理和限流
+
+#### 进度风险
+- ⚠️ 某个功能开发超时
+- ⚠️ Bug 修复耗时过长
+- ⚠️ 数据准备不及时
+
+#### 解决方案
+- 每日检查进度
+- 及时调整计划
+- 提前准备测试数据
+
+---
+
+## 📚 参考资料
+
+### 你需要的文档
+- [React Native 官方文档](https://reactnative.dev/)
+- [Expo 官方文档](https://docs.expo.dev/)
+- [React Navigation 文档](https://reactnavigation.org/)
+- [Zustand 文档](https://github.com/pmndrs/zustand)
+- [Supabase 文档](https://supabase.com/docs)
+
+### 她需要的文档
+- [Node.js 官方文档](https://nodejs.org/)
+- [Express 文档](https://expressjs.com/)
+- [Puppeteer 文档](https://pptr.dev/)（数据抓取）
+- [Coze API 文档](https://www.coze.com/docs)
+- [Supabase API 文档](https://supabase.com/docs/reference/javascript)
+
+---
+
+## 🎉 完成标准
+
+### 功能完成标准
+- ✅ 所有 P0 功能开发完成
+- ✅ 所有功能测试通过
+- ✅ 无 P0/P1 级别 Bug
+- ✅ 代码审查通过
+- ✅ 文档完善
+
+### 质量标准
+- ✅ 应用启动时间 < 2秒
+- ✅ 页面切换时间 < 300ms
+- ✅ API 响应时间 < 500ms
+- ✅ 无内存泄漏
+- ✅ 无崩溃
+
+### 发布标准
+- ✅ iOS 和 Android 都可以运行
+- ✅ 真机测试通过
+- ✅ TestFlight/Internal Testing 可用
+- ✅ 发布文档完成
+
+---
+
+**准备好了吗？让我们开始 2 周的开发冲刺！** 🚀
+
+**记住**：
+- 每天站会同步进度
+- 遇到问题及时沟通
+- 代码提交前自测
+- 保持代码质量
+
+**加油！** 💪
