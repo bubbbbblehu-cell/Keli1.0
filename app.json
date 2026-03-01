@@ -1,0 +1,59 @@
+{
+  "expo": {
+    "name": "女性安全地图",
+    "slug": "safety-map-mobile",
+    "version": "3.0.0",
+    "orientation": "portrait",
+    "icon": "./src/assets/images/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./src/assets/images/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#6366f1"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.safetymap.mobile",
+      "infoPlist": {
+        "NSCameraUsageDescription": "需要访问相机以拍摄酒店房间照片进行安全检测",
+        "NSPhotoLibraryUsageDescription": "需要访问相册以选择照片进行安全检测",
+        "NSLocationWhenInUseUsageDescription": "需要访问位置以显示附近的酒店"
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./src/assets/images/adaptive-icon.png",
+        "backgroundColor": "#6366f1"
+      },
+      "package": "com.safetymap.mobile",
+      "permissions": [
+        "CAMERA",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE",
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_COARSE_LOCATION"
+      ]
+    },
+    "web": {
+      "favicon": "./src/assets/images/favicon.png"
+    },
+    "plugins": [
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "需要访问相机以拍摄酒店房间照片进行安全检测"
+        }
+      ],
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "需要访问位置以显示附近的酒店"
+        }
+      ]
+    ]
+  }
+}
+
