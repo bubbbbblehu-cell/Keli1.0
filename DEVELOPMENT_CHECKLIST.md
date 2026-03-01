@@ -51,7 +51,7 @@ COZE_BOT_ID=7588350694353649679
 ### 第1周：功能开发
 
 #### Day 1（今天）- Bubble：环境配置 + 功能测试
-- [ ] 向南瓜获取 Supabase Anon Key 和 API 地址
+- [x] 向南瓜获取 Supabase Anon Key 和 API 地址
 - [ ] 创建 `.env` 文件，配置环境变量
 - [ ] 安装依赖：`npm install`
 - [ ] 启动项目：`npm start`
