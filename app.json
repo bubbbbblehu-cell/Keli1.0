@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "女性安全地图",
-    "slug": "safety-map-mobile",
+    "name": "Keli",
+    "slug": "keli",
     "version": "3.0.0",
     "orientation": "portrait",
     "icon": "./src/assets/images/icon.png",
@@ -16,7 +16,7 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.safetymap.mobile",
+      "bundleIdentifier": "com.keli.mobile",
       "infoPlist": {
         "NSCameraUsageDescription": "需要访问相机以拍摄酒店房间照片进行安全检测",
         "NSPhotoLibraryUsageDescription": "需要访问相册以选择照片进行安全检测",
@@ -28,13 +28,17 @@
         "foregroundImage": "./src/assets/images/adaptive-icon.png",
         "backgroundColor": "#6366f1"
       },
-      "package": "com.safetymap.mobile",
+      "package": "com.keli.mobile",
       "permissions": [
         "CAMERA",
         "READ_EXTERNAL_STORAGE",
         "WRITE_EXTERNAL_STORAGE",
         "ACCESS_FINE_LOCATION",
-        "ACCESS_COARSE_LOCATION"
+        "ACCESS_COARSE_LOCATION",
+        "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO",
+        "android.permission.ACCESS_COARSE_LOCATION",
+        "android.permission.ACCESS_FINE_LOCATION"
       ]
     },
     "web": {
@@ -53,7 +57,12 @@
           "locationAlwaysAndWhenInUsePermission": "需要访问位置以显示附近的酒店"
         }
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "e68d56d9-b423-4abe-a779-3ee2f1f05823"
+      }
+    },
+    "owner": "kelis-organization"
   }
 }
-
